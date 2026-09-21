@@ -1,0 +1,8 @@
+# Local cloned repositories and sub-workspaces
+CAN-Demo/
+CAN/
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+*.tmp

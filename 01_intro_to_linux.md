@@ -80,18 +80,11 @@ The cloned `CAN` repository includes a predefined `.devcontainer` configuration 
      > *"Folder contains a Dev Container configuration file. Reopen in Container to develop in a container."*  
      Click **"Reopen in Container"**.
    * *Alternative / Manual Trigger:* Press `F1` (or `Ctrl + Shift + P` / `Cmd + Shift + P`), type **`Dev Containers: Reopen in Container`**, and press `Enter`.
-3. **Container Build & Initialization (First-Time Setup: ~3–6 minutes):**  
+3. **Container Build & Initialization (First-Time Setup: ~15 minutes):**  
    * VS Code will build the Docker container image based on `ros:humble`.
    * The workspace will be mounted to `/workspace` inside the container.
    * VS Code automatically runs `.devcontainer/postCreate.sh`, which sources ROS 2 Humble in `~/.bashrc`, clones `micro_ros_setup` into `~/microros_ws`, and updates `rosdep`.
    * VS Code automatically installs all required extensions in the container (C/C++, CMake Tools, Python, and PlatformIO IDE).
-
-> [!TIP]
-> **How to Monitor Dev Container Progress & View Live Logs:**  
-> To verify that the container build is actively progressing and not frozen:
-> 1. Click **"Show Log"** on the progress popup in the bottom-right corner of VS Code.
-> 2. Or open the **Output panel** (`Ctrl + Shift + U` / `Cmd + Shift + U`) and select **Dev Containers** from the dropdown menu on the top right. This will stream the live Docker downloads, package installations, and `postCreate.sh` scripts in real time.  
-> *Subsequent launches of the container will be near-instant (< 5 seconds).*
 
 > [!NOTE]
 > **Hardware & Peripheral Access:**  
@@ -111,8 +104,25 @@ The cloned `CAN` repository includes a predefined `.devcontainer` configuration 
 
 #### 1. micro-ROS Embedded Firmware Build Test
 > [!NOTE]
-> **First-Time Build Time Expectation (~3–7 minutes):**  
-> On the very first run, PlatformIO must download the ESP32 toolchain, pull all micro-ROS embedded packages (`rcutils`, `rmw_microxrcedds`, `micro_ros_msgs`, `rosidl`, etc.), and cross-compile the middleware stack. **The build is NOT frozen** during this process. Subsequent builds will be cached and take only ~5–10 seconds.
+> **First-Time Build Time Expectation (~25–45 minutes on laptops):**  
+> On the very first run, PlatformIO downloads the ESP32 toolchain, pulls ~50 micro-ROS embedded packages (`rcutils`, `rmw_microxrcedds`, `micro_ros_msgs`, `sensor_msgs`, `geometry_msgs`, `rcl`, `rclc`, etc.), and cross-compiles the entire embedded ROS 2 stack for the microcontroller. **The build is NOT frozen** while displaying `Building micro-ROS library`. Once this initial build finishes, all libraries are permanently cached, and subsequent builds will take only **~5–10 seconds**.
+
+> [!TIP]
+> **How to Monitor Live micro-ROS Compilation Progress:**  
+> If the terminal appears stuck on `Building micro-ROS library`, you can open a second integrated terminal tab (`Ctrl + Shift + \``) inside the container and check active progress:
+> 1. **Check which packages have finished building:**
+>    ```bash
+>    ls /workspace/microROS_test/.pio/libdeps/esp32dev/micro_ros_platformio/build/mcu/build
+>    ```
+> 2. **Check active compiler processes & CPU activity:**
+>    ```bash
+>    top
+>    ```
+>    *(Look for active `cmake`, `colcon`, and `xtensa-esp32-elf-gcc` compiler jobs).*
+> 3. **Run with Verbose Output:**
+>    ```bash
+>    pio run -v
+>    ```
 
 1. In the VS Code integrated terminal, navigate to the `microROS_test` directory:
    ```bash
@@ -122,7 +132,6 @@ The cloned `CAN` repository includes a predefined `.devcontainer` configuration 
    ```bash
    pio run
    ```
-   *(Optional: Use `pio run -v` to enable verbose output and see every file being compiled in real-time).*  
    *(Alternatively, click the **PlatformIO Build** checkmark $\checkmark$ in the VS Code status bar).*
 3. Confirm the build finishes with `[SUCCESS]`.
 
@@ -169,7 +178,7 @@ The cloned `CAN` repository includes a predefined `.devcontainer` configuration 
   ```text
   ========================= [SUCCESS] Took X.XX seconds =========================
   Environment    Status    Duration
-  teensy40       SUCCESS   00:00:XX
+  esp32dev       SUCCESS   00:00:XX
   ```
 
 #### Check 3: Verify ROS 2 Colcon Build (`colcon build`)
