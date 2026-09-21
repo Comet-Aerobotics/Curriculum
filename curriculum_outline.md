@@ -55,11 +55,10 @@
 ### 1. [Module 1: Intro to Linux & Development Environment Setup](01_intro_to_linux.md)
 * **Core Concepts:** Linux architecture, kernel vs. distribution, ROS 2 & embedded ecosystem, filesystem hierarchy (`/`), permissions model (`sudo`), and Docker containerization.
 * **Hands-on Environment Setup:**
-  * Docker Desktop (WSL2 backend) installation.
-  * Loading and running the `microros` Dev Container with hardware device mapping (`-v /dev:/dev --privileged`).
-  * Attaching VS Code with Remote / Dev Containers extension pack.
-  * In-container test builds for micro-ROS (`pio run` / CMake) and ROS 2 workspace (`colcon build`, `teleop_publisher`).
-* **Verification Checkpoint:** Docker container status (`docker ps`), micro-ROS build success (`pio run`), and ROS 2 teleop execution.
+  * Docker Desktop (WSL2 backend), Git, and VS Code Dev Containers installation.
+  * Cloning `https://github.com/Comet-Aerobotics/CAN` and opening the project in the automated ROS 2 Humble / micro-ROS Dev Container.
+  * In-container test builds for micro-ROS (`/workspace/microROS_test` via `pio run`) and ROS 2 workspace (`/workspace/cometbot_ws` via `colcon build`).
+* **Verification Checkpoint:** Dev Container status badge / `docker ps`, micro-ROS build success (`pio run`), and ROS 2 teleop publisher execution.
 
 ---
 

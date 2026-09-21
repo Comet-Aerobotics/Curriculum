@@ -27,9 +27,9 @@
 
 ---
 
-## 3. Robotics Development Environment Setup (Docker & Dev Containers)
+## 3. Robotics Development Environment Setup (VS Code & Dev Containers)
 
-Follow the step-by-step instructions below to configure Docker, VS Code, and the team's micro-ROS / ROS 2 Dev Container environment.
+Follow the step-by-step instructions below to configure Docker, Git, VS Code, and launch the team's ROS 2 Humble / micro-ROS Dev Container from the `CAN` repository.
 
 ### a. Step 1: Install Docker Desktop / Engine
 Select the guide for your host operating system:
@@ -39,76 +39,104 @@ Select the guide for your host operating system:
     ```powershell
     wsl --install
     ```
-  * *Troubleshooting:* If this fails, search for **"Turn Windows features on or off"** in the Windows Start menu, ensure **"Virtual Machine Platform"** and **"Windows Subsystem for Linux"** are checked, restart your machine, and re-run the installer selecting the **WSL2 backend**.
+  * *Troubleshooting:* If this fails, search for **"Turn Windows features on or off"** in the Windows Start menu, ensure **"Virtual Machine Platform"** and **"Windows Subsystem for Linux"** are checked, restart your machine, and re-run the Docker Desktop installer selecting the **WSL2 backend**.
+  * Ensure Docker Desktop is started and running before proceeding.
 * 🍎 **macOS Setup:**  
   Follow the [Docker Desktop for Mac Installation Guide](https://docs.docker.com/desktop/setup/install/mac-install/).
 * 🐧 **Linux Setup:**  
   Follow the [Docker Desktop for Linux Installation Guide](https://docs.docker.com/desktop/setup/install/linux/) or [Docker Engine on Ubuntu](https://docs.docker.com/engine/install/ubuntu/).
 
-### b. Step 2: Download & Run the Docker Container
-1. 📥 **Download Container Archive:**  
-   [Download the Docker container (`microros.tar.gz`)](https://drive.google.com/open?id=1zUqxaGNR6tewxhOx2clXEHCjqa0ZG-T5)
-2. **Load and Run the Container:**  
-   Open a terminal in the folder containing `microros.tar.gz` and execute:
-   ```bash
-   docker load -i microros.tar.gz
-   docker run -it --net=host -v /dev:/dev --privileged --name microros basicuros
-   ```
-   > [!NOTE]
-   > `--net=host` allows ROS 2 DDS discovery across your local network.  
-   > `-v /dev:/dev --privileged` maps connected microcontrollers (e.g. `/dev/ttyUSB0`, CAN adapters) into the container.
+---
 
-3. **Re-opening the Container on Daily Work:**  
-   Once the container is created, get an interactive shell session anytime by running:
-   ```bash
-   docker start -i microros bash
-   ```
-   *(Or click the terminal icon within Docker Desktop).*
-   * 💡 **Windows 1-Click Terminal Shortcut:**  
-     In Windows Terminal Settings (`Ctrl + ,`), add a new profile with the command line:
-     ```powershell
-     %SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe docker start -i microros bash
-     ```
+### b. Step 2: Install Git & Clone the Repository
+If you do not have Git installed on your host system:
+* 🪟 **Windows:** Download and install [Git for Windows](https://git-scm.com/download/win) (or run `winget install --id Git.Git -e --source winget` in PowerShell).
+* 🍎 **macOS:** Run `xcode-select --install` in Terminal, or install via Homebrew with `brew install git`.
+* 🐧 **Linux (Ubuntu/Debian):** Run `sudo apt update && sudo apt install -y git`.
 
-### c. Step 3: Install VS Code & Dev Container Extensions
-1. 📥 **Install VS Code:** Download and install [Visual Studio Code](https://code.visualstudio.com/download).
-2. 🔌 **Install Remote / Dev Containers Extension Pack:**  
-   In VS Code, open the Extensions tab (`Ctrl + Shift + X`) and install:
-   * `ms-vscode-remote.vscode-remote-extensionpack` (Remote Development)
-   * `ms-vscode-remote.remote-containers` (Dev Containers)
+Once Git is installed, open your terminal (PowerShell, macOS Terminal, or Linux Bash) in your preferred projects folder and clone the repository:
+```bash
+git clone https://github.com/Comet-Aerobotics/CAN.git
+```
 
-### d. Step 4: Connect VS Code to the Running Container
-1. Ensure the `microros` Docker container is running (`docker start -i microros bash`).
-2. In VS Code, click the **Remote Status Bar icon** in the bottom-left corner (or press `F1` / `Ctrl + Shift + P`).
-3. Select **"Dev Containers: Attach to Running Container..."** (or **"Attach to Running Container..."**) and select **`microros`**.
-4. A new VS Code window will open attached directly inside the container environment.
-5. In the attached window, go to **File > Open Folder...** and open either:
-   * `/root/CAN/microROS_test/` (Embedded micro-ROS firmware repository)
-   * `~/CAN/cometbot_ws` (ROS 2 robot workspace)
-6. *If prompted:* Allow CMake to **"scan for kits"**, open the parent git repository, and choose the provided `CMakeLists.txt`. Run `git pull` if necessary to fetch the latest upstream changes.
+---
 
-### e. Step 5: Install Required Extensions Inside the Container
-Inside the container-attached VS Code window, open Extensions (`Ctrl + Shift + X`) and verify/install:
-* `ms-vscode.cpptools-extension-pack` (C/C++ Extension Pack)
-* `platformio.platformio-ide` (PlatformIO IDE for embedded builds)
-* `nonanonno.vscode-ros2` (ROS 2 tooling & syntax support)
+### c. Step 3: Install VS Code & Dev Containers Extension
+1. 📥 **Install VS Code:** Download and install [Visual Studio Code](https://code.visualstudio.com/download) on your host operating system.
+2. 🔌 **Install the Dev Containers Extension:**  
+   In VS Code, open the Extensions view (`Ctrl + Shift + X` / `Cmd + Shift + X`) and install:
+   * **Dev Containers** (`ms-vscode-remote.remote-containers`)  
+   *(Optionally, install the **Remote Development** extension pack `ms-vscode-remote.vscode-remote-extensionpack`).*
+
+---
+
+### d. Step 4: Open the `CAN` Repository in the Dev Container
+The cloned `CAN` repository includes a predefined `.devcontainer` configuration (`Dockerfile`, `devcontainer.json`, and `postCreate.sh`) that automatically provisions ROS 2 Humble, micro-ROS setup tools, PlatformIO, CMake, Python, and the necessary VS Code extensions inside an isolated Linux container.
+
+1. **Open `CAN` Folder in VS Code:**  
+   Launch VS Code, click **File > Open Folder...**, and select the cloned `CAN` repository folder.
+2. **Reopen in Container:**  
+   * When the folder opens, VS Code will display a notification in the bottom right corner:  
+     > *"Folder contains a Dev Container configuration file. Reopen in Container to develop in a container."*  
+     Click **"Reopen in Container"**.
+   * *Alternative / Manual Trigger:* Press `F1` (or `Ctrl + Shift + P` / `Cmd + Shift + P`), type **`Dev Containers: Reopen in Container`**, and press `Enter`.
+3. **Container Build & Initialization (First-Time Setup: ~3–6 minutes):**  
+   * VS Code will build the Docker container image based on `ros:humble`.
+   * The workspace will be mounted to `/workspace` inside the container.
+   * VS Code automatically runs `.devcontainer/postCreate.sh`, which sources ROS 2 Humble in `~/.bashrc`, clones `micro_ros_setup` into `~/microros_ws`, and updates `rosdep`.
+   * VS Code automatically installs all required extensions in the container (C/C++, CMake Tools, Python, and PlatformIO IDE).
+
+> [!TIP]
+> **How to Monitor Dev Container Progress & View Live Logs:**  
+> To verify that the container build is actively progressing and not frozen:
+> 1. Click **"Show Log"** on the progress popup in the bottom-right corner of VS Code.
+> 2. Or open the **Output panel** (`Ctrl + Shift + U` / `Cmd + Shift + U`) and select **Dev Containers** from the dropdown menu on the top right. This will stream the live Docker downloads, package installations, and `postCreate.sh` scripts in real time.  
+> *Subsequent launches of the container will be near-instant (< 5 seconds).*
+
+> [!NOTE]
+> **Hardware & Peripheral Access:**  
+> The `.devcontainer/devcontainer.json` configuration includes `--privileged` and maps `/dev/ttyUSB0`, `/dev/ttyACM0`, and `/dev/bus/usb` so connected microcontrollers, CAN adapters, and sensors can be accessed directly from within the container.
+
+---
+
+### e. Step 5: Working in the Container
+* **Status Bar Indicator:** Once connected, the bottom-left corner of VS Code will display `Dev Container: CAN - ROS2 Humble Dev Container`.
+* **Integrated Terminal:** Open a terminal in VS Code (`Ctrl + ~` / `Ctrl + ` ` ` or via **Terminal > New Terminal**).
+  * You will be logged in as user `vscode` in `/workspace`.
+  * ROS 2 Humble and micro-ROS environment variables are automatically sourced via `~/.bashrc`.
+
+---
 
 ### f. Step 6: Test Builds & Verification
 
-#### 1. micro-ROS Build Test
-1. Press `Ctrl + Shift + P` and execute `CMake: Configure`.
-2. Open `src/main.cpp`.
-3. Click the **PlatformIO Build** checkmark ($\checkmark$) in the status bar at the bottom (or run `pio run` in the terminal).
-4. Confirm the build completes with `[SUCCESS]`.
+#### 1. micro-ROS Embedded Firmware Build Test
+> [!NOTE]
+> **First-Time Build Time Expectation (~3–7 minutes):**  
+> On the very first run, PlatformIO must download the ESP32 toolchain, pull all micro-ROS embedded packages (`rcutils`, `rmw_microxrcedds`, `micro_ros_msgs`, `rosidl`, etc.), and cross-compile the middleware stack. **The build is NOT frozen** during this process. Subsequent builds will be cached and take only ~5–10 seconds.
+
+1. In the VS Code integrated terminal, navigate to the `microROS_test` directory:
+   ```bash
+   cd /workspace/microROS_test
+   ```
+2. Build the firmware target using PlatformIO:
+   ```bash
+   pio run
+   ```
+   *(Optional: Use `pio run -v` to enable verbose output and see every file being compiled in real-time).*  
+   *(Alternatively, click the **PlatformIO Build** checkmark $\checkmark$ in the VS Code status bar).*
+3. Confirm the build finishes with `[SUCCESS]`.
 
 #### 2. ROS 2 Python Workspace Build Test
-1. In VS Code, open `~/CAN/cometbot_ws`.
-2. Open an integrated terminal (`Ctrl + ~`) and build the workspace:
+1. In the VS Code integrated terminal, navigate to the `cometbot_ws` workspace:
+   ```bash
+   cd /workspace/cometbot_ws
+   ```
+2. Build the workspace packages and source the local overlay:
    ```bash
    colcon build
    source install/setup.bash
    ```
-3. Test running a ROS 2 joy node:
+3. Test running the ROS 2 joy node:
    ```bash
    ros2 run joy joy_node
    ```
@@ -117,6 +145,7 @@ Inside the container-attached VS Code window, open Extensions (`Ctrl + Shift + X
    ```bash
    ros2 run cometbot_control teleop_publisher
    ```
+   *(Press `Ctrl + C` to stop the node).*
 
 ---
 
@@ -124,15 +153,19 @@ Inside the container-attached VS Code window, open Extensions (`Ctrl + Shift + X
 
 ### a. Verification Checks
 
-#### Check 1: Verify Running Docker Container (`docker ps`)
-* **Expected Output on Host Machine:**
+#### Check 1: Verify Active Dev Container in VS Code
+* **Status Indicator:** The VS Code bottom-left status badge displays:
   ```text
-  CONTAINER ID   IMAGE        COMMAND   CREATED         STATUS         PORTS   NAMES
-  <id>           basicuros    "bash"    5 minutes ago   Up 5 minutes           microros
+  >< Dev Container: CAN - ROS2 Humble Dev Container
+  ```
+* **Host Docker Verification (`docker ps` on host terminal):**
+  ```text
+  CONTAINER ID   IMAGE                                 COMMAND                  STATUS         NAMES
+  <id>           vsc-can-<hash>-uid                    "sleep infinity"         Up X minutes   <container-name>
   ```
 
 #### Check 2: Verify PlatformIO Embedded Build (`pio run`)
-* **Expected Output in `/root/CAN/microROS_test`:**
+* **Expected Output in `/workspace/microROS_test`:**
   ```text
   ========================= [SUCCESS] Took X.XX seconds =========================
   Environment    Status    Duration
@@ -140,7 +173,7 @@ Inside the container-attached VS Code window, open Extensions (`Ctrl + Shift + X
   ```
 
 #### Check 3: Verify ROS 2 Colcon Build (`colcon build`)
-* **Expected Output in `~/CAN/cometbot_ws`:**
+* **Expected Output in `/workspace/cometbot_ws`:**
   ```text
   Starting >>> cometbot_control
   Finished <<< cometbot_control [X.XXs]
@@ -148,10 +181,11 @@ Inside the container-attached VS Code window, open Extensions (`Ctrl + Shift + X
   ```
 
 ### b. Completion Checklist for Instructors & Students
-- [ ] Docker installed and configured with WSL2 / native backend.
-- [ ] `microros.tar.gz` image loaded and container created with `--net=host` and `/dev` permissions.
-- [ ] VS Code Dev Containers attached to the running `microros` container.
-- [ ] In-container extensions installed (`C/C++`, `PlatformIO`, `ROS 2`).
-- [ ] Successfully compiled micro-ROS embedded target (`pio run` / CMake).
-- [ ] Successfully built ROS 2 workspace (`colcon build`) and ran `teleop_publisher`.
+- [ ] Docker Desktop / Engine installed and running with WSL2 (Windows) or native engine (Linux/macOS).
+- [ ] Git installed on the host OS and `https://github.com/Comet-Aerobotics/CAN` cloned.
+- [ ] VS Code installed with the **Dev Containers** extension (`ms-vscode-remote.remote-containers`).
+- [ ] `CAN` repository opened via Dev Containers (`Dev Container: CAN - ROS2 Humble Dev Container`).
+- [ ] Dev Container initialized with automated `postCreate.sh` setup (ROS 2 Humble + `~/microros_ws`).
+- [ ] Successfully compiled micro-ROS embedded target in `/workspace/microROS_test` (`pio run`).
+- [ ] Successfully built ROS 2 workspace in `/workspace/cometbot_ws` (`colcon build`) and verified `teleop_publisher`.
 
