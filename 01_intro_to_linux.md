@@ -136,21 +136,25 @@ The cloned `CAN` repository includes a predefined `.devcontainer` configuration 
 3. Confirm the build finishes with `[SUCCESS]`.
 
 #### 2. ROS 2 Python Workspace Build Test
-1. In the VS Code integrated terminal, navigate to the `cometbot_ws` workspace:
+1. In the VS Code integrated terminal, install the ROS 2 `joy` package:
+   ```bash
+   sudo apt update && sudo apt install -y ros-humble-joy
+   ```
+2. Navigate to the `cometbot_ws` workspace:
    ```bash
    cd /workspace/cometbot_ws
    ```
-2. Build the workspace packages and source the local overlay:
+3. Build the workspace packages and source the local overlay:
    ```bash
    colcon build
    source install/setup.bash
    ```
-3. Test running the ROS 2 joy node:
+4. Test running the ROS 2 joy node:
    ```bash
    ros2 run joy joy_node
    ```
    *(Press `Ctrl + C` to stop the node).*
-4. Test running the teleop publisher node:
+5. Test running the teleop publisher node:
    ```bash
    ros2 run cometbot_control teleop_publisher
    ```
