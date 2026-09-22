@@ -1,18 +1,31 @@
 # Module 4: How to Properly Use AI in Engineering
 
-> **Target:** Learn how to properly use AI for system design dialogue and targeted debugging—**without** having AI write code for you.  
+> **Target:** Learn how to properly use AI for system design dialogue, targeted debugging, and helper scripting—while ensuring all production code is human-authored and 100% owned by you.  
 > **Core Principles:**
-> 1. **System Architecture:** Back-and-forth collaborative dialogue is encouraged to explore trade-offs and system design.
-> 2. **Debugging (Single-Prompt & Reflection):** Use one prompt per error. If it doesn't fix it or reveals a new error, **reflect and refine your question**: *Why is it breaking? What do you expect of it?* Consult docs/logs, and restart fresh for new errors.
-> 3. **Implementation:** All code must be human-authored and fully understood by you.
+> 1. **System Architecture:** Back-and-forth collaborative dialogue is encouraged to explore trade-offs, system design, and communication patterns.
+> 2. **Production Code vs. Helper Scripts:** All production robot code (ROS 2 nodes, controllers, firmware, state machines) must be human-authored. AI may be used to assist with one-off helper or developer scripts (such as reusable bash install scripts or setup utilities).
+> 3. **100% Code Ownership (Even for Scripts):** You are 100% accountable for every line of code you commit to the repository. You must read, audit, understand, and own all code—including AI-assisted scripts.
+> 4. **Debugging (Single-Prompt & Reflection):** Use one prompt per error to understand root causes. If it doesn't resolve it, **reflect and refine your question**: *Why is it breaking? What do you expect of it?* Consult docs/logs, and restart fresh for new errors.
 
 ---
 
-## 1. Engineering Philosophy: Why AI Shouldn't Write Your Code
-### a. Building Real Engineering Intuition
-* **i. Skill Acquisition:** The goal of onboarding is to build your mental models, low-level debugging intuition, and command of the robotics stack. Copy-pasting AI-generated code bypasses understanding.
-* **ii. Fragility in Robotics:** AI lacks physical ground truth. It does not know when a motor driver is about to overheat or why a real sensor dropped packets. Engineers who rely on AI to generate code are unable to troubleshoot hardware when the robot fails in the field.
-* **iii. Code Ownership & PR Accountability:** In code reviews, you are 100% accountable for every line of code submitted. Saying *"the AI wrote that"* is never acceptable.
+## 1. Engineering Philosophy: Production Code vs. Helper Scripts
+
+### a. Building Real Engineering Intuition for Production Code
+* **i. Skill Acquisition:** The goal of onboarding is to build your mental models, low-level debugging intuition, and command of the robotics stack. Copy-pasting AI-generated code for core robot algorithms bypasses understanding.
+* **ii. Fragility in Robotics:** AI lacks physical ground truth. It does not know when a motor driver is about to overheat or why a real CAN bus dropped frames. Engineers who rely on AI to generate production code cannot troubleshoot hardware when the robot fails in the field.
+* **iii. Production Code Must Be Human-Authored:** All ROS 2 nodes, action servers, sensor pipelines, and competition state machines must be authored directly by you.
+
+### b. Permissible Use: One-Off Assistance & Developer Scripts
+It is completely acceptable to leverage AI for non-production tooling and developer automation:
+* **Reusable Installation & Setup Scripts:** Authoring `postCreate.sh`, docker environment bootstrap scripts, or apt/pip dependency installers.
+* **Data Parsing & Scratch Helpers:** Quick Python scripts to parse CSV logs, format Foxglove layout JSONs, or generate test inputs.
+
+### c. The Golden Rule of Code Ownership
+**You must own every line of code you commit—including scripts.**
+* Never run or commit a script you do not understand.
+* Saying *"the AI wrote this script and that's why it broke the environment"* is never acceptable in code review or post-mortems.
+* You are responsible for security, correctness, idempotency, and error handling for all committed code.
 
 ---
 
@@ -150,7 +163,8 @@ python3 ~/practice_ws/heartbeat_node.py
 ```
 
 ### b. Completion Checklist for Instructors & Students
-- [ ] Student understands the strict policy: **Do NOT use AI to write your code**.
+- [ ] Student understands the policy: **Production robot code must be human-authored; AI may assist with one-off helper/setup scripts**.
+- [ ] Student acknowledges the **100% Code Ownership Rule**: You must review, audit, and understand every line of code you commit (including scripts).
 - [ ] Student understands when to dialogue (system design & architecture) vs. when to use the **Single-Prompt & Reflection Rule** (debugging).
 - [ ] Student successfully conducted an architectural trade-off discussion (Topics vs. Services vs. Actions).
 - [ ] When debugging, student uses single prompts to explain errors, reflects on *why it broke* and *what was expected*, refines questions, and searches official docs rather than relying on multi-turn code-guessing loops.

@@ -63,8 +63,8 @@
 * **Verification Checkpoint:** Creating a feature branch, committing with Conventional Commits, and verifying commit graph linearity.
 
 ### 4. [Module 4: How to Properly Use AI in Engineering](04_proper_ai_usage.md)
-* **Core Concepts:** Collaborative architecture dialogue, targeted debugging prompts, root-cause reflection, and docs/log investigation.
-* **Verification Checkpoint:** Multi-turn architectural trade-off discussion, human-authored node implementation, and structured reflection debugging.
+* **Core Concepts:** Collaborative architecture dialogue, targeted debugging prompts, root-cause reflection, human-authored production code vs. AI-assisted helper/setup scripts, and 100% code ownership.
+* **Verification Checkpoint:** Multi-turn architectural trade-off discussion, human-authored node implementation, structured reflection debugging, and script auditing.
 
 ---
 
