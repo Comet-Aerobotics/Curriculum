@@ -81,7 +81,7 @@ The cloned `CAN` repository includes a predefined `.devcontainer` configuration 
      Click **"Reopen in Container"**.
    * *Alternative / Manual Trigger:* Press `F1` (or `Ctrl + Shift + P` / `Cmd + Shift + P`), type **`Dev Containers: Reopen in Container`**, and press `Enter`.
 3. **Container Build & Initialization (First-Time Setup: ~15 minutes):**  
-   * VS Code will build the Docker container image based on `ros:humble`.
+   * VS Code will build the Docker container image based on `ros:humble` (pre-installing `ros-humble-joy`, `teleop-twist-joy`, `numpy`, and developer tools).
    * The workspace will be mounted to `/workspace` inside the container.
    * VS Code automatically runs `.devcontainer/postCreate.sh`, which sources ROS 2 Humble in `~/.bashrc`, clones `micro_ros_setup` into `~/microros_ws`, and updates `rosdep`.
    * VS Code automatically installs all required extensions in the container (C/C++, CMake Tools, Python, and PlatformIO IDE).
@@ -136,25 +136,21 @@ The cloned `CAN` repository includes a predefined `.devcontainer` configuration 
 3. Confirm the build finishes with `[SUCCESS]`.
 
 #### 2. ROS 2 Python Workspace Build Test
-1. In the VS Code integrated terminal, install the ROS 2 `joy` package:
-   ```bash
-   sudo apt update && sudo apt install -y ros-humble-joy
-   ```
-2. Navigate to the `cometbot_ws` workspace:
+1. In the VS Code integrated terminal, navigate to the `cometbot_ws` workspace:
    ```bash
    cd /workspace/cometbot_ws
    ```
-3. Build the workspace packages and source the local overlay:
+2. Build the workspace packages and source the local overlay:
    ```bash
    colcon build
    source install/setup.bash
    ```
-4. Test running the ROS 2 joy node:
+3. Test running the pre-installed ROS 2 joy node:
    ```bash
    ros2 run joy joy_node
    ```
    *(Press `Ctrl + C` to stop the node).*
-5. Test running the teleop publisher node:
+4. Test running the teleop publisher node:
    ```bash
    ros2 run cometbot_control teleop_publisher
    ```
