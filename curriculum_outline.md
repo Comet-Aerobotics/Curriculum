@@ -1,8 +1,8 @@
 # Robotics & Autonomy Onboarding Curriculum
 
-> **Purpose:** Comprehensive, tutorial-driven onboarding curriculum for new team members to learn essential Linux, Computer Vision, Telemetry, AI, and Git engineering skills.  
-> **Approach:** Students follow curated official documentation and interactive web courses on their VM, complete hands-on checkpoints, and verify their results against expected outputs.  
-> **Key References:** [ROS 2 Humble Tutorials](https://docs.ros.org/en/humble/Tutorials/Beginner-Client-Libraries/Writing-A-Simple-Cpp-Publisher-And-Subscriber.html) | [micro-ROS Documentation](https://micro.vulcanexus.org/docs/tutorials/core/first_application_linux/) | [Foxglove Studio Docs](https://docs.foxglove.dev)
+> **Purpose:** Comprehensive, tutorial-driven onboarding curriculum for new team members to learn essential Linux, Git, AI collaboration, and specialized robotics engineering domains (Controls, Mapping, Simulation, and Telemetry Dashboards).  
+> **Approach:** Students complete core foundation modules, progress through specialized track subcurriculums in their Dev Container, and verify their results against expected terminal outputs before completing the Capstone challenge.  
+> **Key References:** [ROS 2 Humble Documentation](https://docs.ros.org/en/humble/) | [ROS 2 Action Tutorial (Python)](https://docs.ros.org/en/humble/Tutorials/Intermediate/Writing-an-Action-Server-Client/Py.html) | [Foxglove Studio Docs](https://docs.foxglove.dev) | [micro-ROS Documentation](https://micro.vulcanexus.org/)
 
 ---
 
@@ -10,127 +10,104 @@
 
 ```
                                 +------------------------------------------+
-                                |  Module 1: Intro to Linux & Architecture |
+                                |  Core Module 1: Intro to Linux & Setup   |
                                 +------------------------------------------+
                                                      |
                                                      v
                                 +------------------------------------------+
-                                |  Module 2: Basic & Essential Linux CLI   |
+                                |  Core Module 2: CLI & Package Management |
                                 +------------------------------------------+
                                                      |
                                                      v
                                 +------------------------------------------+
-                                |  Module 7: Git & GitHub Team Workflows   |
+                                |  Core Module 7: Git & GitHub Workflows   |
                                 +------------------------------------------+
                                                      |
                                                      v
                                 +------------------------------------------+
-                                |   Module 6: How to Properly Use AI       |
+                                |  Core Module 6: Proper AI Engineering    |
                                 +------------------------------------------+
                                                      |
-                         +---------------------------+---------------------------+
-                         |                                                       |
-                         v                                                       v
-+--------------------------------------------------+   +--------------------------------------------------+
-| Module 3: Computer Vision Concepts & Sensors     |   | Module 5: Foxglove Studio for Robotics Telemetry |
-+--------------------------------------------------+   +--------------------------------------------------+
-                         |                                                       |
-                         +---------------------------+---------------------------+
-                                                     |
-                                                     v
-                                +------------------------------------------+
-                                | Module 4: Robotics & CV Data Structures  |
-                                +------------------------------------------+
+         +---------------------------+---------------+---------------------------+
+         |                           |                               |           |
+         v                           v                               v           v
++------------------+       +-------------------+           +------------------+ +------------------+
+|     Controls     |       |      Mapping      |           |    Simulation    | |    Dashboard     |
+|  Subcurriculum   |       |   Subcurriculum   |           |  Subcurriculum   | |  Subcurriculum   |
+| (Actions/Teleop) |       | (Sensors/Clouds)  |           | (Launch/Mocks)   | | (Foxglove/UIs)   |
++------------------+       +-------------------+           +------------------+ +------------------+
+         |                           |                               |           |
+         +---------------------------+---------------+---------------------------+
                                                      |
                                                      v
                                 +------------------------------------------+
-                                | Final Capstone: End-to-End Integration   |
+                                |  Final Capstone: End-to-End Integration  |
                                 +------------------------------------------+
 ```
 
 ---
 
-# Module Directory & Tutorial Roadmap
+# 1. Core Foundation Modules
 
 ### 1. [Module 1: Intro to Linux & Development Environment Setup](01_intro_to_linux.md)
 * **Core Concepts:** Linux architecture, kernel vs. distribution, ROS 2 & embedded ecosystem, filesystem hierarchy (`/`), permissions model (`sudo`), and Docker containerization.
-* **Hands-on Environment Setup:**
-  * Docker Desktop (WSL2 backend), Git, and VS Code Dev Containers installation.
-  * Cloning `https://github.com/Comet-Aerobotics/CAN` and opening the project in the automated ROS 2 Humble / micro-ROS Dev Container.
-  * In-container test builds for micro-ROS (`/workspace/microROS_test` via `pio run`) and ROS 2 workspace (`/workspace/cometbot_ws` via `colcon build`).
-* **Verification Checkpoint:** Dev Container status badge / `docker ps`, micro-ROS build success (`pio run`), and ROS 2 teleop publisher execution.
+* **Hands-on Environment Setup:** Docker Desktop (WSL2 backend), Git, and VS Code Dev Containers installation for `https://github.com/Comet-Aerobotics/CAN`.
+* **Verification Checkpoint:** Active Dev Container status, micro-ROS firmware build (`pio run`), and ROS 2 joy test.
 
----
+### 2. [Module 2: Essential Linux Commands & Package Management](02_basic_linux_commands.md)
+* **Core Concepts:** Navigation (`pwd`, `cd`, `ls`), file ops (`mkdir`, `cp`, `mv`, `rm`), streams & redirection (`>`, `>>`), pipes (`|`), `grep`, manuals (`man`), and package management (System `apt` vs. Python `pip` & `venv`).
+* **Verification Checkpoint:** Telemetry log creation, pipe-to-grep filtering, man page search, and isolated Python virtual environment (`venv`) with NumPy.
 
-### 2. [Module 2: Essential Linux Commands & Terminal Mastery](02_basic_linux_commands.md)
-* **Core Concepts:** Filesystem navigation (`pwd`, `cd`, `ls`), directory/file operations (`mkdir`, `cp`, `mv`, `rm`), standard streams & redirection (`>`, `>>`), pipes (`|`), `grep`, system documentation (`man`), and package management (System `apt` vs. Python `pip` & `venv`).
-* **Web Tutorials to Follow:**
-  * [Terminal Tutor (https://www.terminaltutor.com/)](https://www.terminaltutor.com/)
-  * [Ubuntu: Command Line for Beginners](https://ubuntu.com/tutorials/command-line-for-beginners)
-  * [Linux Journey: Text-Fu](https://linuxjourney.com/lesson/text-fu)
-* **Verification Checkpoint:** Generating telemetry log with redirection, piping output to `grep`, searching manual pages with `man`, and creating an isolated Python virtual environment (`venv`) with NumPy.
+### 3. [Module 6: How to Properly Use AI in Engineering](06_proper_ai_usage.md)
+* **Core Concepts:** Collaborative architecture dialogue, targeted debugging prompts, root-cause reflection, and docs/log investigation.
+* **Verification Checkpoint:** Multi-turn architectural trade-off discussion, human-authored node implementation, and structured reflection debugging.
 
----
-
-### 3. [Module 3: Computer Vision Concepts, Depth Cameras & Spatial AI](03_intro_to_computer_vision.md)
-* **Core Concepts:** Pinhole camera model ($K$), stereo triangulation ($Z = \frac{f \cdot b}{d}$), Active vs. Passive Stereo (IR dot projector), OAK-D Pro hardware edge compute (RVC2), and Visual-Inertial SLAM (RGB-D + IMU).
-* **Web Tutorials to Follow:**
-  * [Luxonis DepthAI ROS 2 Guide](https://docs.luxonis.com/software-v3/depthai/ros)
-  * [Luxonis OAK-D Pro Hardware Specifications](https://shop.luxonis.com/products/oak-d-pro)
-* **Verification Checkpoint:** Calculating 3D-to-2D pinhole projection and OAK-D Pro stereo disparity-to-depth metrics.
-
----
-
-### 4. [Module 4: Computer Vision & Robotics Data Structures](04_computer_vision_data_structures.md)
-* **Core Concepts:** Extracting Depth Maps (`cv_bridge`), parsing Point Clouds (`sensor_msgs_py` / Open3D), indexing Nav2 Costmaps (`OccupancyGrid`), Luxonis DepthAI AprilTag 6-DoF pose detection, and querying TF2 coordinate frames.
-* **Web Tutorials to Follow:**
-  * [Open3D: Point Cloud Processing & Downsampling](http://www.open3d.org/docs/release/tutorial/geometry/pointcloud.html)
-  * [Nav2 Concepts: Costmaps & Occupancy Grids](https://navigation.ros.org/concepts/index.html)
-  * [Luxonis DepthAI AprilTag Documentation](https://docs.luxonis.com/)
-  * [ROS 2: Introduction to TF2 & Coordinate Frames](https://docs.ros.org/en/humble/Tutorials/Intermediate/Tf2/Introduction-To-Tf2.html)
-* **Verification Checkpoint:** Back-projecting 2D depth pixels into 3D metric coordinates and calculating 2D occupancy grid indices.
-
----
-
-### 5. [Module 5: ROS 2 Topics & Foxglove Studio Visualization](05_intro_to_foxglove.md)
-* **Core Concepts:** ROS 2 Publisher-Subscriber architecture, topic typing and CLI introspection (`ros2 topic list`, `echo`, `hz`), and Foxglove Studio panel-to-topic subscriptions (Image, 3D PointCloud, and Numerical Plot panels).
-* **Web Tutorials to Follow:**
-  * [ROS 2: Understanding Topics Tutorial](https://docs.ros.org/en/humble/Tutorials/Beginner-CLI-Tools/Understanding-ROS2-Topics/Understanding-ROS2-Topics.html)
-  * [Foxglove Studio Getting Started Video](https://www.youtube.com/watch?v=wX5y-P5p58M) & [Documentation](https://docs.foxglove.dev/docs/studio/)
-  * [Foxglove ROS 2 WebSocket Bridge Guide](https://github.com/foxglove/ros-foxglove-bridge)
-* **Verification Checkpoint:** Connecting Foxglove to topic streams, building a 3-panel synchronized dashboard, and exporting the layout JSON.
-
----
-
-### 6. [Module 6: How to Properly Use AI in Engineering](06_proper_ai_usage.md)
-* **Core Concepts:** Collaborative back-and-forth dialogue for system design and architecture; targeted single-prompt explanations for debugging (NOT having AI write code); reflecting on failures (*Why is it breaking? What do you expect of it?*), question refinement, investigating via docs/logs, and restarting fresh for new errors.
-* **Web Tutorials & Reference Guides:**
-  * [Anthropic Prompt Engineering Interactive Guide](https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview)
-  * [OpenAI Prompt Engineering Strategies](https://platform.openai.com/docs/guides/prompt-engineering)
-  * [ROS 2 Humble Architecture & Concepts](https://docs.ros.org/en/humble/Concepts.html)
-  * [micro-ROS First Application on Linux](https://micro.vulcanexus.org/docs/tutorials/core/first_application_linux/)
-* **Verification Checkpoint:** Multi-turn architectural trade-off discussion with AI, human-authored node implementation, and single-prompt/reflection debugging practice.
-
----
-
-### 7. [Module 7: Git & GitHub Collaboration Workflows](07_intro_to_github.md)
+### 4. [Module 7: Git & GitHub Collaboration Workflows](07_intro_to_github.md)
 * **Core Concepts:** Git vs. GitHub, 3 local states, feature branching off `newdepositorbranch`, Conventional Commits scoped to robot subsystems (`feat(depositor):`, `feat(excavator):`, `feat(microros):`), PR lifecycle, and `.gitignore` hygiene.
-* **Web Tutorials to Follow:**
-  * [GitHub Skills: Introduction to GitHub (Interactive Course)](https://skills.github.com/)
-  * [Learn Git Branching (Interactive Sandbox Game)](https://learngitbranching.js.org/)
-  * [Conventional Commits 1.0.0 Specification](https://www.conventionalcommits.org/en/v1.0.0/)
-  * [GitHub Docs: Resolving Merge Conflicts](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/addressing-merge-conflicts/resolving-a-merge-conflict-using-the-command-line)
 * **Verification Checkpoint:** Creating a feature branch, committing with Conventional Commits, and verifying commit graph linearity.
+
+---
+
+# 2. Specialized Domain Subcurriculums
+
+### 🕹️ [Controls & Autonomy Track](controls/README.md)
+* **[Controls Module 1: ROS 2 Actions — Writing an Action Server & Client in Python](controls/01_ros2_actions_server_client.md)**  
+  * Deep dive into the [official ROS 2 Action Tutorial](https://docs.ros.org/en/humble/Tutorials/Intermediate/Writing-an-Action-Server-Client/Py.html).
+  * Topics vs. Services vs. Actions decision matrix.
+  * Writing Action Servers and Clients in Python with goal validation, live feedback loops, cancellation, and multithreading.
+  * Hands-on implementation of the `/excavate` and `/deposit` competition action pipeline.
+* **[Controls Module 2: Teleoperation, Joystick Mapping & Actuator Control](controls/02_teleop_and_subsystems.md)**  
+  * Gamepad interfacing via `joy_node`, mathematical deadbands ($\sqrt{v_x^2 + \omega_z^2}$), exponential power scaling ($v^3$), and clamped multi-publisher actuator outputs.
+
+---
+
+### 🗺️ [Perception, SLAM & Mapping Track](mapping/README.md)
+* **[Mapping Module 1: Computer Vision Concepts, Depth Cameras & Spatial AI](mapping/01_computer_vision_sensors.md)**  
+  * Pinhole camera intrinsic matrix $K$, active vs. passive stereo triangulation ($Z = \frac{f \cdot B}{d}$), IR dot projection, and OAK-D Pro hardware edge compute.
+* **[Mapping Module 2: Robotics & Computer Vision Data Structures](mapping/02_spatial_data_structures.md)**  
+  * Extracting depth matrices with `cv_bridge`, 3D PointClouds (`sensor_msgs/msg/PointCloud2`), 2D Occupancy Grids (`nav_msgs/msg/OccupancyGrid`), AprilTag 6-DoF detection, and TF2 coordinate trees.
+
+---
+
+### 🚀 [Robotics Simulation & Testing Track](simulation/README.md)
+* **[Simulation Module 1: ROS 2 Launch Files, Mock Sensors & Mission Simulation](simulation/01_launch_files_and_mission_sim.md)**  
+  * Writing modular ROS 2 Python launch files (`launch.py`), declaring launch arguments, instantiating mock sensor nodes (simulated load cells), and running end-to-end mission simulations (`mission_sim.launch.py`).
+
+---
+
+### 📊 [Telemetry & Operator UI Track](dashboard/README.md)
+* **[Dashboard Module 1: Foxglove Studio for Robotics Telemetry & Operator UIs](dashboard/01_foxglove_studio_telemetry.md)**  
+  * Real-time WebSocket streaming with `foxglove_bridge`, configuring 3D PointCloud visualizers, time-series actuator plots, interactive teleop panels, and exporting version-controlled layout JSON files.
 
 ---
 
 # Final Capstone: Cometbot End-to-End Integration Challenge
 
-> **Goal:** Test complete end-to-end robotics mastery by connecting all 7 modules across the Comet-Aerobotics Lunabotics competition stack.
+> **Goal:** Connect all core foundation modules and domain tracks across the Comet-Aerobotics Lunabotics competition stack.
 
-### 1. The Capstone Progression
-* **a. Step 1 (Git & Dev Container):** In the `microros` Dev Container, checkout a new feature branch `feature/onboarding-<name>` from `newdepositorbranch` in `~/CAN/cometbot_ws`.
-* **b. Step 2 (micro-ROS & CAN Firmware):** Build the Teensy/ESP32 firmware in `/root/CAN/microROS_test` via `pio run` to verify CAN motor controller communications.
-* **c. Step 3 (Subsystem & Action Orchestration):** Build `cometbot_ws` (`colcon build`) and launch the simulated excavation/deposition action pipeline (`ros2 launch cometbot_control mission_sim.launch.py`).
-* **d. Step 4 (Foxglove Telemetry Dashboard):** Connect Foxglove Studio to live topic streams (`/camera/depth/color/points`, `/load_sensor/weight`, `/robot_status`), verify synchronized playback, and export your layout configuration JSON.
-* **e. Step 5 (PR Submission & Verification):** Push your branch to `https://github.com/Comet-Aerobotics/CAN`, open a Pull Request adhering to Conventional Commits, and document terminal verification outputs.
+### The Capstone Progression
+1. **Step 1 (Git & Dev Container):** In the Dev Container, checkout a new feature branch `feature/onboarding-<name>` from `newdepositorbranch`.
+2. **Step 2 (micro-ROS & CAN Firmware):** Build the microcontroller firmware in `/workspace/microROS_test` via `pio run` to verify embedded CAN motor controller communications.
+3. **Step 3 (Subsystem & Action Orchestration):** Build `cometbot_ws` (`colcon build`) and launch the simulated excavation/deposition action pipeline (`ros2 launch cometbot_control mission_sim.launch.py`).
+4. **Step 4 (Foxglove Telemetry Dashboard):** Connect Foxglove Studio to live topic streams (`/camera/depth/color/points`, `/load_sensor/weight`, `/robot_status`), verify synchronized playback, and export your layout configuration JSON.
+5. **Step 5 (PR Submission & Verification):** Push your branch to `https://github.com/Comet-Aerobotics/CAN`, open a Pull Request adhering to Conventional Commits, and document terminal verification outputs.
