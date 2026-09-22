@@ -1,4 +1,4 @@
-# Controls Module 2: Teleoperation, Joystick Mapping & Actuator Control
+# Controls Module 3: Teleoperation, Joystick Mapping & Actuator Control
 
 > **Target:** Master manual and semi-autonomous robot teleoperation, joystick axes and button mapping, mathematical deadband and power curve filtering, and multi-publisher actuator control.  
 > **Key References:** [ROS 2 joy package documentation](https://index.ros.org/p/joy/) | [geometry_msgs/msg/Twist](https://docs.ros2.org/latest/api/geometry_msgs/msg/Twist.html)

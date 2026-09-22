@@ -71,12 +71,16 @@
 # 2. Specialized Domain Subcurriculums
 
 ### 🕹️ [Controls & Autonomy Track](controls/README.md)
-* **[Controls Module 1: ROS 2 Actions — Writing an Action Server & Client in Python](controls/01_ros2_actions_server_client.md)**  
+* **[Controls Module 1: ROS 2 Services — Writing a Service Server & Client in Python](controls/01_ros2_services_server_client.md)**  
+  * Deep dive into the [official ROS 2 Service Tutorial](https://docs.ros.org/en/humble/Tutorials/Beginner-Client-Libraries/Writing-A-Simple-Py-Service-And-Client.html).
+  * 1-to-1 synchronous/asynchronous Request/Response patterns with `create_service` and `call_async()`.
+  * Subsystem sensor calibration and tare triggers (`/zero_load_cell`).
+* **[Controls Module 2: ROS 2 Actions — Writing an Action Server & Client in Python](controls/02_ros2_actions_server_client.md)**  
   * Deep dive into the [official ROS 2 Action Tutorial](https://docs.ros.org/en/humble/Tutorials/Intermediate/Writing-an-Action-Server-Client/Py.html).
   * Topics vs. Services vs. Actions decision matrix.
   * Writing Action Servers and Clients in Python with goal validation, live feedback loops, cancellation, and multithreading.
   * Hands-on implementation of the `/excavate` and `/deposit` competition action pipeline.
-* **[Controls Module 2: Teleoperation, Joystick Mapping & Actuator Control](controls/02_teleop_and_subsystems.md)**  
+* **[Controls Module 3: Teleoperation, Joystick Mapping & Actuator Control](controls/03_teleop_and_subsystems.md)**  
   * Gamepad interfacing via `joy_node`, mathematical deadbands ($\sqrt{v_x^2 + \omega_z^2}$), exponential power scaling ($v^3$), and clamped multi-publisher actuator outputs.
 
 ---

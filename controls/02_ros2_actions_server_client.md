@@ -1,13 +1,14 @@
-# Controls Module 1: ROS 2 Actions — Writing an Action Server & Client in Python
+# Controls Module 2: ROS 2 Actions — Writing an Action Server & Client in Python
 
 > **Target:** Master ROS 2 Actions for long-running, preemptible robotic behaviors. Understand the action communication lifecycle (Goal, Feedback, Result), implement an Action Server and Action Client in Python following official ROS 2 Humble specifications, and apply actions to autonomous competition subsystems (`Excavate` & `Deposit`).  
+> **Prerequisites:** [Controls Module 1: ROS 2 Services](01_ros2_services_server_client.md)  
 > **Key References:** [ROS 2 Humble Action Tutorial (Python)](https://docs.ros.org/en/humble/Tutorials/Intermediate/Writing-an-Action-Server-Client/Py.html) | [ROS 2 Action Design Article](https://design.ros2.org/articles/actions.html)
 
 ---
 
 ## 1. Action Fundamentals & Communication Paradigms
 
-ROS 2 provides three core communication mechanisms. Choosing the correct mechanism is critical for clean robotics system design:
+In [Controls Module 1](01_ros2_services_server_client.md), you mastered discrete 1-to-1 **Services**. While services are ideal for instantaneous triggers, **Actions** are designed for tasks that take seconds or minutes to complete and require continuous progress updates.
 
 ### a. Topics vs. Services vs. Actions Comparison
 
@@ -19,7 +20,7 @@ ROS 2 provides three core communication mechanisms. Choosing the correct mechani
 
 ### b. The ROS 2 Action Architecture (Goal, Feedback, Result)
 
-An action is built on top of topics and services under the hood:
+An action is composed of three underlying services and one topic:
 1. **Goal Service:** The Action Client sends a goal request to the Action Server. The server accepts or rejects the goal.
 2. **Feedback Topic:** While executing the task, the server periodically publishes real-time progress updates back to the client.
 3. **Result Service:** Once the task completes, fails, or is cancelled, the server returns the final outcome to the client.
@@ -257,33 +258,7 @@ if __name__ == '__main__':
 
 ---
 
-## 5. Package Configuration (`package.xml` & `setup.py`)
-
-To compile and execute Python action nodes, your package must declare action dependencies:
-
-### a. `package.xml`
-```xml
-<depend>rclpy</depend>
-<depend>action_msgs</depend>
-<depend>cometbot_msgs</depend>
-```
-
-### b. `setup.py` Entry Points
-```python
-entry_points={
-    'console_scripts': [
-        'excavator_action_server = cometbot_control.excavator_action_server:main',
-        'depositor_action_server = cometbot_control.depositor_action_server:main',
-        'action_client_example = cometbot_control.action_client_example:main',
-    ],
-},
-```
-
----
-
-## 6. CLI Action Introspection & Manual Testing
-
-ROS 2 provides powerful command-line tools for inspecting and interacting with action servers without writing custom client code:
+## 5. CLI Action Introspection & Manual Testing
 
 1. **List all available actions:**
    ```bash
@@ -304,7 +279,7 @@ ROS 2 provides powerful command-line tools for inspecting and interacting with a
 
 ---
 
-## 7. Hands-On Practice Scenario (Run inside Dev Container)
+## 6. Hands-On Practice Scenario (Run inside Dev Container)
 
 1. Open your Dev Container terminal in `/workspace/cometbot_ws`.
 2. Build the workspace to compile all message and action IDL bindings:
@@ -327,7 +302,7 @@ ROS 2 provides powerful command-line tools for inspecting and interacting with a
 
 ---
 
-## 8. Expected Outputs & Instructor Verification Checklist
+## 7. Expected Outputs & Instructor Verification Checklist
 
 ### a. Expected Terminal Outputs
 
