@@ -85,11 +85,14 @@
 
 ---
 
-### 🗺️ [Perception, SLAM & Mapping Track](mapping/README.md)
-* **[Mapping Module 1: Computer Vision Concepts, Depth Cameras & Spatial AI](mapping/01_computer_vision_sensors.md)**  
-  * Pinhole camera intrinsic matrix $K$, active vs. passive stereo triangulation ($Z = \frac{f \cdot B}{d}$), IR dot projection, and OAK-D Pro hardware edge compute.
-* **[Mapping Module 2: Robotics & Computer Vision Data Structures](mapping/02_spatial_data_structures.md)**  
-  * Extracting depth matrices with `cv_bridge`, 3D PointClouds (`sensor_msgs/msg/PointCloud2`), 2D Occupancy Grids (`nav_msgs/msg/OccupancyGrid`), AprilTag 6-DoF detection, and TF2 coordinate trees.
+### 🗺️ [Perception, Mapping & Localization Track](mapping/README.md)
+* **[Mapping Module 1: AprilTag 6-DoF Pose Estimation & Kalman Filter Sensor Fusion](mapping/01_apriltags_and_sensor_fusion.md)**  
+  * Physical interpretation of 6-DoF poses ($X, Y, Z, \text{yaw}, \text{pitch}, \text{roll}$) in camera optical frames.
+  * Relative target distance and bearing calculations.
+  * Extended Kalman Filter (EKF) sensor fusion in ROS 2 (`robot_localization`) fusing high-rate wheel odometry/IMU with zero-drift visual AprilTags.
+* **[Mapping Module 2: Camera Intrinsics & Isaac Sim Perception Interface](mapping/02_camera_intrinsics_and_isaac_sim_interface.md)**  
+  * Understanding the Camera Intrinsics Matrix ($K$) and inspecting live `sensor_msgs/msg/CameraInfo`.
+  * The Isaac Sim Perception Interface Contract: synthetic output topics (`/image_raw`, `/camera_info`, `/depth`, `/points`, `/imu/data`) and control input loopback.
 
 ---
 
