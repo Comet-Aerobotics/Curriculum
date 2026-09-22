@@ -1,4 +1,4 @@
-# Module 6: How to Properly Use AI in Engineering
+# Module 4: How to Properly Use AI in Engineering
 
 > **Target:** Learn how to properly use AI for system design dialogue and targeted debugging—**without** having AI write code for you.  
 > **Core Principles:**

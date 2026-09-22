@@ -1,4 +1,4 @@
-# Module 7: Git & GitHub Collaboration Workflows
+# Module 3: Git & GitHub Collaboration Workflows
 
 > **Target:** Master Git version control, branching strategies, Conventional Commits, Pull Request workflows, and merge conflict resolution applied directly to the **Comet-Aerobotics/CAN** repository.  
 > **Key Goal:** Complete the interactive Git courses, execute a feature-branch commit workflow using Conventional Commits, and verify your commit history.

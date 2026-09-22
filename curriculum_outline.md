@@ -20,12 +20,12 @@
                                                      |
                                                      v
                                 +------------------------------------------+
-                                |  Core Module 7: Git & GitHub Workflows   |
+                                |  Core Module 3: Git & GitHub Workflows   |
                                 +------------------------------------------+
                                                      |
                                                      v
                                 +------------------------------------------+
-                                |  Core Module 6: Proper AI Engineering    |
+                                |  Core Module 4: Proper AI Engineering    |
                                 +------------------------------------------+
                                                      |
          +---------------------------+---------------+---------------------------+
@@ -34,7 +34,7 @@
 +------------------+       +-------------------+           +------------------+ +------------------+
 |     Controls     |       |      Mapping      |           |    Simulation    | |    Dashboard     |
 |  Subcurriculum   |       |   Subcurriculum   |           |  Subcurriculum   | |  Subcurriculum   |
-| (Actions/Teleop) |       | (Sensors/Clouds)  |           | (Launch/Mocks)   | | (Foxglove/UIs)   |
+| (Service/Action) |       | (AprilTags/EKF)   |           | (Launch/Mocks)   | | (Foxglove/UIs)   |
 +------------------+       +-------------------+           +------------------+ +------------------+
          |                           |                               |           |
          +---------------------------+---------------+---------------------------+
@@ -58,13 +58,13 @@
 * **Core Concepts:** Navigation (`pwd`, `cd`, `ls`), file ops (`mkdir`, `cp`, `mv`, `rm`), streams & redirection (`>`, `>>`), pipes (`|`), `grep`, manuals (`man`), and package management (System `apt` vs. Python `pip` & `venv`).
 * **Verification Checkpoint:** Telemetry log creation, pipe-to-grep filtering, man page search, and isolated Python virtual environment (`venv`) with NumPy.
 
-### 3. [Module 6: How to Properly Use AI in Engineering](06_proper_ai_usage.md)
-* **Core Concepts:** Collaborative architecture dialogue, targeted debugging prompts, root-cause reflection, and docs/log investigation.
-* **Verification Checkpoint:** Multi-turn architectural trade-off discussion, human-authored node implementation, and structured reflection debugging.
-
-### 4. [Module 7: Git & GitHub Collaboration Workflows](07_intro_to_github.md)
+### 3. [Module 3: Git & GitHub Collaboration Workflows](03_intro_to_github.md)
 * **Core Concepts:** Git vs. GitHub, 3 local states, feature branching off `newdepositorbranch`, Conventional Commits scoped to robot subsystems (`feat(depositor):`, `feat(excavator):`, `feat(microros):`), PR lifecycle, and `.gitignore` hygiene.
 * **Verification Checkpoint:** Creating a feature branch, committing with Conventional Commits, and verifying commit graph linearity.
+
+### 4. [Module 4: How to Properly Use AI in Engineering](04_proper_ai_usage.md)
+* **Core Concepts:** Collaborative architecture dialogue, targeted debugging prompts, root-cause reflection, and docs/log investigation.
+* **Verification Checkpoint:** Multi-turn architectural trade-off discussion, human-authored node implementation, and structured reflection debugging.
 
 ---
 
