@@ -23,7 +23,7 @@
 * **i. Single Unified Root (`/`):** All drives and peripherals mount within one directory hierarchy (no `C:\` or `D:\` drives).
 * **ii. "Everything is a File":** Devices, serial ports, and live telemetry appear as file paths (`/dev/`, `/proc/`, `/sys/`).
 * **iii. Security & Permissions:** Strict separation between unprivileged users and superuser administrative tasks via `sudo`.
-* **iv. Package Management (`apt`):** Deterministic, command-line dependency resolution instead of manual `.exe` or `.dmg` installers.
+* **iv. Package Management (`apt` vs. `pip`):** Deterministic, command-line dependency resolution instead of manual `.exe` or `.dmg` installers (covered in hands-on depth in [Module 2](02_basic_linux_commands.md#e-tutorial-5-package-management-in-linux-system-apt-vs-python-pip--venv)).
 
 ---
 

@@ -63,12 +63,12 @@
 ---
 
 ### 2. [Module 2: Essential Linux Commands & Terminal Mastery](02_basic_linux_commands.md)
-* **Core Concepts:** Filesystem navigation (`pwd`, `cd`, `ls`), directory/file operations (`mkdir`, `cp`, `mv`, `rm`), standard streams & redirection (`>`, `>>`), pipes (`|`), `grep`, and system documentation (`man`).
+* **Core Concepts:** Filesystem navigation (`pwd`, `cd`, `ls`), directory/file operations (`mkdir`, `cp`, `mv`, `rm`), standard streams & redirection (`>`, `>>`), pipes (`|`), `grep`, system documentation (`man`), and package management (System `apt` vs. Python `pip` & `venv`).
 * **Web Tutorials to Follow:**
   * [Terminal Tutor (https://www.terminaltutor.com/)](https://www.terminaltutor.com/)
   * [Ubuntu: Command Line for Beginners](https://ubuntu.com/tutorials/command-line-for-beginners)
   * [Linux Journey: Text-Fu](https://linuxjourney.com/lesson/text-fu)
-* **Verification Checkpoint:** Generating telemetry log with redirection, piping output to `grep`, and searching manual pages using `man`.
+* **Verification Checkpoint:** Generating telemetry log with redirection, piping output to `grep`, searching manual pages with `man`, and creating an isolated Python virtual environment (`venv`) with NumPy.
 
 ---
 
